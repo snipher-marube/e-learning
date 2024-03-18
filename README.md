@@ -14,7 +14,7 @@ This is an e-learning platform that provides online courses on various subjects.
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/e-learning-platform.git`
+1. Clone the repository: `git clone https://github.com/snipher-marube/e-learning.git`
 2. Install dependencies: `pip install -r requirements.txt`
 3. Set up the database: `python manage.py migrate`
 4. Start the development server: `python manage.py runserver`
@@ -43,4 +43,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For any questions or inquiries, please contact [your-email@example.com](mailto:your-email@example.com).
+For any questions or inquiries, please contact [sniphermarube@gmail.com](mailto:sniphermarube@gmail.com).
