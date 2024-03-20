@@ -10,6 +10,7 @@ from django.views.generic.detail import DetailView
 
 from .models import Course, Content, Module, Subject
 from .forms import ModuleFormSet
+from students.forms import CourseEnrollForm
 
 
 class ManageCourseListView(ListView):
@@ -162,7 +163,7 @@ class CourseDetailView(DetailView):
     model = Course
     template_name = 'courses/course/detail.html'
     
-    '''def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
         context['enroll_form'] = CourseEnrollForm(initial={'course': self.object})
-        return context'''
+        return context
