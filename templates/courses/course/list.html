@@ -1,45 +1,47 @@
-{% extends "base.html" %}
-{% block title %}
-{% if subject %}
-{{ subject.title }} courses
-{% else %}
-All courses
-{% endif %}
-{% endblock %}
-{% block content %}
-<h1>
-{% if subject %}
-{{ subject.title }} courses
-{% else %}
-All courses
-{% endif %}
-</h1>
-<div class="contents">
-<h3>Subjects</h3>
-<ul id="modules">
-<li {% if not subject %}class="selected"{% endif %}>
-<a href="{% url 'course_list' %}">All</a>
-</li>
-{% for s in subjects %}
-<li {% if subject == s %}class="selected"{% endif %}>
-<a href="{% url 'course_list_subject' s.slug %}">
-{{ s.title }}
-<br><span>{{ s.total_courses }} courses</span>
-</a>
-</li>
-{% endfor %}
-</ul>
+<!-- @format -->
+
+{% extends "base.html" %} {% block title %} {% if subject %} {{ subject.title }}
+courses {% else %} All courses {% endif %} {% endblock %} {% block content %}
+
+<div class="grid grid-flow-dense sm:grid-cols-4 ">
+  <div class="sm:col-span-1 bg-slate-300/45 ">
+    <h1 class="uppercase text-center my-2 underline text-2xl font-bold">
+      {% if subject %} {{subject.title}} courses {% else %} All courses {% endif %}
+    </h1>
+    
+    <div class="bg-blue-200 h-[100%]">
+        <h1 class="mx-4 my-2 px-3 text-xl font-semibold">Subjects</h1>
+      <ul role="list">
+        <li class="mx-4 px-3 my-3 text-lg hover:bg-slate-400">
+          <a href="{% url 'course_list' %}">All Courses</a>
+        </li>
+        {% for s in subjects %}
+        <li class="mx-4 my-3 text-md hover:bg-slate-400 px-3">
+          <a href="{% url 'course_list_subject' s.slug %}" class="text-semibold"> {{s.title}} </a>
+          <br />
+          <span class="text-xs"> {{s.total_courses}} Courses </span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <!--right side-->
+  <div class="sm:col-span-3 bg-white">
+    {% for course in courses %} {% with subject=course.subject %}
+    <div class="hover:bg-slate-300">
+        <div class="mx-4 my-2 py-2">
+            <a href="{% url 'course_detail' course.slug %}" class="text-md  hover:underline font-bold text-2xl "> {{course.title}} </a>
+        <div class="">
+          <a href="{% url 'course_list_subject' subject.slug %}" class="text-md underline text-green-400"> {{subject}} </a>
+          <span class="text-sm">{{ course.total_modules }} modules </span> 
+          <span class="text-xs">Instractor: {{course.owner.username}}</span>
+        </div>
+        </div>
+    </div>
+    
+    {% endwith %} {% endfor %}
+  </div>
 </div>
-<div class="module">
-{% for course in courses %}
-{% with subject=course.subject %}
-<h3><a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a></h3>
-<p>
-<a href="{% url 'course_list_subject' subject.slug %}">{{ subject }}</a>.
-{{ course.total_modules }} modules.
-Instructor: {{ course.owner.get_full_name }}
-</p>
-{% endwith %}
-{% endfor %}
-</div>
+
 {% endblock %}
