@@ -2,12 +2,16 @@
 
 {% extends "base.html" %} {% block title %} Sign up {% endblock %} 
 {% block content %}
-<h1>Sign up</h1>
-<div class="module">
-  <p>Enter your details to create an account:</p>
-  <form action="" method="post">
-    {{ form.as_p }} {% csrf_token %}
-    <p><input type="submit" value="Create my account" /></p>
+
+
+<div class="container mx-6">
+  <h1 class="text-center text-2xl font-bold">Sign up</h1>
+  <form action="" method="POST">
+    {{form.as_p}}
+    {% csrf_token %}
+    <button type="submit" class="bg-sky-600 p-4 my-2">Create Account</button>
   </form>
 </div>
+
+
 {% endblock %}
